@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Setup initial config if doesn't exist yet
+test -e $SNAP_DATA/daemon_arguments || cp $SNAP/etc/bird_exporter/daemon_arguments.example $SNAP_DATA/daemon_arguments
+
+. $SNAP_DATA/daemon_arguments
+echo "* Running $SNAP/bin/bird_exporter with args: $ARGS"
+export LD_LIBRARY_PATH=$SNAP/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/x86_64-linux-gnu/statsd
+$SNAP/bin/bird_exporter $ARGS

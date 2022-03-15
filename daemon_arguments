@@ -1,61 +1,49 @@
 # Set the command-line arguments to pass to the statsd_exporter daemon
-ARGS=""
+ARGS="-bird.v2 -format.new -bird.socket /run/bird/bird.ctl"
 
 # Example of the commands:
-# --web.listen-address=":9102"
-#                         The address on which to expose the web interface
-#                         and generated Prometheus metrics.
-# --web.enable-lifecycle    Enable shutdown and reload via HTTP request.
-# --web.telemetry-path="/metrics"
-#                         Path under which to expose metrics.
-# --statsd.listen-udp=":9125"
-#                         The UDP address on which to receive statsd
-#                         metric lines. "" disables it.
-# --statsd.listen-tcp=":9125"
-#                         The TCP address on which to receive statsd
-#                         metric lines. "" disables it.
-# --statsd.listen-unixgram=""
-#                         The Unixgram socket path to receive statsd
-#                         metric lines in datagram. "" disables it.
-# --statsd.unixsocket-mode="755"
-#                         The permission mode of the unix socket.
-# --statsd.mapping-config=STATSD.MAPPING-CONFIG
-#                         Metric mapping configuration file name.
-# --statsd.read-buffer=STATSD.READ-BUFFER
-#                         Size (in bytes) of the operating system's
-#                         transmit read buffer associated with the UDP or
-#                         Unixgram connection. Please make sure the kernel
-#                         parameters net.core.rmem_max is set to a value
-#                         greater than the value specified.
-# --statsd.cache-size=1000  Maximum size of your metric mapping cache.
-#                         Relies on least recently used replacement policy
-#                         if max size is reached.
-# --statsd.cache-type=lru   Metric mapping cache type. Valid options are
-#                         "lru" and "random"
-# --statsd.event-queue-size=10000
-#                         Size of internal queue for processing events
-# --statsd.event-flush-threshold=1000
-#                         Number of events to hold in queue before
-#                         flushing
-# --statsd.event-flush-interval=200ms
-#                         Maximum time between event queue flushes.
-# --debug.dump-fsm=""       The path to dump internal FSM generated for
-#                         glob matching as Dot file.
-# --check-config            Check configuration and exit.
-# --statsd.parse-dogstatsd-tags  
-#                         Parse DogStatsd style tags. Enabled by default.
-# --statsd.parse-influxdb-tags  
-#                         Parse InfluxDB style tags. Enabled by default.
-# --statsd.parse-librato-tags  
-#                         Parse Librato style tags. Enabled by default.
-# --statsd.parse-signalfx-tags  
-#                         Parse SignalFX style tags. Enabled by default.
-# --statsd.relay.address=STATSD.RELAY.ADDRESS  
-#                         The UDP relay target address (host:port)
-# --statsd.relay.packet-length=1400  
-#                         Maximum relay output packet length to avoid fragmentation
-# --log.level=info          Only log messages with the given severity or
-#                         above. One of: [debug, info, warn, error]
-# --log.format=logfmt       Output format of log messages. One of: [logfmt,
-#                         json]
-# --version                 Show application version.
+# **-bird.ipv4**
+#     Get protocols from bird (not compatible with **-bird.v2**)
+# 
+# **-bird.ipv6**
+#     Get protocols from bird6 (not compatible with **-bird.v2**)
+# 
+# **-bird.socket** */path/to/socket*
+#     Socket to communicate with bird routing daemon
+# 
+# **-bird.socket6** */path/to/socket*
+#     Socket to communicate with bird6 routing daemon (not compatible with
+# **-bird.v2**)
+# 
+# **-bird.v2**
+#     BIRD major version >= 2.0 (multi channel protocols)
+# 
+# **-format.new**
+#     New metric format (more convenient / generic)
+# 
+# **-proto.bgp**
+#     Enables metrics for protocol BGP
+# 
+# **-proto.direct**
+#     Enables metrics for protocol Direct
+# 
+# **-proto.kernel**
+#     Enables metrics for protocol Kernel
+# 
+# **-proto.ospf**
+#     Enables metrics for protocol OSPF
+# 
+# **-proto.static**
+#     Enables metrics for protocol Static
+# 
+# **-proto.babel**
+#     Enables metrics for protocol Babel
+# 
+# **-version**
+#     Print version information
+# 
+# **-web.listen-address** *[address]:port*
+#     Address on which to expose metrics and web interface
+# 
+# **-web.telemetry-path** *path*
+#     Path under which to expose metrics (default "/metrics")

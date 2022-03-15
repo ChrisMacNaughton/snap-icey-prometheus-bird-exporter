@@ -1,41 +1,42 @@
 ---
-name: icey-prometheus-statsd-exporter
+name: icey-prometheus-bird-exporter
 version: 0.0.1
-summary: Prometheus statsd Exporter
+summary: Prometheus bird Exporter
 description: |
-  Exporter that exposes information gathered from statsd for use by the Prometheus monitoring system
-confinement: strict
+  Exporter that exposes information gathered from bird(2) for use by the Prometheus monitoring system
+confinement: classic
 grade: stable
-base: core18
+base: core20
 parts:
-  statsd-exporter:
+  bird-exporter:
     plugin: go
-    source: https://github.com/prometheus/statsd_exporter.git
-    go-importpath: github.com/prometheus/statsd_exporter
+    source: https://github.com/czerwonk/bird_exporter.git
+    # go-importpath: github.com/czerwonk/bird_exporter
     # build-packages:
     #   - librados-dev
     #   - libnss3
     #   - libsqlite3-0
     prime:
-      - bin/statsd_exporter
-  statsd-exporter-config:
+      - bin/bird_exporter
+  bird-exporter-config:
     plugin: dump
     source: .
     organize:
-      daemon_arguments: etc/statsd_exporter/daemon_arguments.example
-      statsd_exporter_wrapper: bin/statsd_exporter.wrapper
+      daemon_arguments: etc/bird_exporter/daemon_arguments.example
+      bird_exporter_wrapper: bin/bird_exporter.wrapper
     # stage-packages:
     #   - librados2
     #   - libgtk3-nocsd0
     #   - libnss3
     #   - libstdc++6
     prime:
-      - etc/statsd_exporter/daemon_arguments.example
-      - bin/statsd_exporter.wrapper
+      - etc/bird_exporter/daemon_arguments.example
+      - bin/bird_exporter.wrapper
       - lib/*
       - usr/lib/*
 apps:
-  statsd-exporter:
-    command: 'bin/statsd_exporter.wrapper'
-    plugs: [network-bind]
+  bird-exporter:
+    command: 'bin/bird_exporter.wrapper'
+    plugs:
+    - network-bind
     daemon: simple

@@ -1,8 +1,7 @@
-# Prometheus-Statsd-Exporter
+# Prometheus-Bird-Exporter
 
-- statsd Exporter Snap for Prometheus
-- Based on https://github.com/prometheus/statsd_exporter
-
+- bird Exporter Snap for Prometheus
+- Based on https://github.com/czerwonk/bird_exporter
 
 
 
